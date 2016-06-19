@@ -18,5 +18,21 @@ package com.company.tokens;
     public void setValue(int value) {
         this.value = value;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof IntValue)) return false;
+
+        IntValue intValue = (IntValue) o;
+
+        return value == intValue.value;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return value;
+    }
 }
 
