@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.tokens.IntValue;
+import com.company.tokens.DoubleValue;
 import com.company.tokens.Operator;
 import com.company.tokens.Token;
 import org.junit.Before;
@@ -24,54 +24,54 @@ public class ExpressionCalculatorTest {
 
     @Test
     public void simpleInteger() throws Exception {
-        List<Token> tokens = Arrays.<Token>asList(new IntValue(1));
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("1");
+        List<Token> tokens = Arrays.<Token>asList(new DoubleValue(1));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("1.0");
 
     }
     @Test
     public void simpleInteger2() throws Exception {
-        List<Token> tokens = Arrays.<Token>asList(new IntValue(2));
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("2");
+        List<Token> tokens = Arrays.<Token>asList(new DoubleValue(2));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("2.0");
     }
     @Test
     public void addTwoSimpleInteger() throws Exception {
-        List<Token> tokens = Arrays.<Token>asList(new IntValue(2), new Operator("+"), new IntValue(3));
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("5");
+        List<Token> tokens = Arrays.<Token>asList(new DoubleValue(2), new Operator("+"), new DoubleValue(3));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("5.0");
     }
     @Test
     public void addTwoSimpleInteger2() throws Exception {
-        List<Token> tokens = Arrays.<Token>asList(new IntValue(4), new Operator("+"), new IntValue(5));
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("9");
+        List<Token> tokens = Arrays.<Token>asList(new DoubleValue(4), new Operator("+"), new DoubleValue(5));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("9.0");
     }
     @Test
     public void addTwoSimpleInteger3() throws Exception {
-        List<Token> tokens = Arrays.<Token>asList(new IntValue(9), new Operator("+"), new IntValue(5));
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("14");
+        List<Token> tokens = Arrays.<Token>asList(new DoubleValue(9), new Operator("+"), new DoubleValue(5));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("14.0");
     }
     @Test
     public void minusTwoSimpleInteger() throws Exception {
-        List<Token> tokens = Arrays.<Token>asList(new IntValue(9), new Operator("-"), new IntValue(5));
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("4");
+        List<Token> tokens = Arrays.<Token>asList(new DoubleValue(9), new Operator("-"), new DoubleValue(5));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("4.0");
     }
     @Test
     public void multiplyTwoSimpleInteger() throws Exception {
-        List<Token> tokens = Arrays.<Token>asList(new IntValue(9), new Operator("*"), new IntValue(5));
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("45");
+        List<Token> tokens = Arrays.<Token>asList(new DoubleValue(9), new Operator("*"), new DoubleValue(5));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("45.0");
     }
     @Test
     public void divideTwoSimpleInteger() throws Exception {
-        List<Token> tokens = Arrays.<Token>asList(new IntValue(4), new Operator("/"), new IntValue(2));
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("2");
+        List<Token> tokens = Arrays.<Token>asList(new DoubleValue(4), new Operator("/"), new DoubleValue(2));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("2.0");
     }
     @Test
     public void divideTwoSimpleInteger2() throws Exception {
-        List<Token> tokens = Arrays.<Token>asList(new IntValue(9), new Operator("/"), new IntValue(5));
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("1");
+        List<Token> tokens = Arrays.<Token>asList(new DoubleValue(9), new Operator("/"), new DoubleValue(5));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("1.8");
     }
     @Test
     public void addTwoDigitInteger3() throws Exception {
-        List<Token> tokens = Arrays.<Token>asList(new IntValue(91), new Operator("+"), new IntValue(5));
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("96");
+        List<Token> tokens = Arrays.<Token>asList(new DoubleValue(91), new Operator("+"), new DoubleValue(5));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("96.0");
     }
 
 }

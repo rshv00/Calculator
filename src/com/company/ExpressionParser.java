@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.tokens.DoubleValue;
+import com.company.tokens.Operator;
 import com.company.tokens.Token;
 
 import java.io.*;
@@ -12,26 +14,21 @@ import java.util.StringTokenizer;
  */
 public class ExpressionParser {
     ArrayList<Token> parseExpression(String exp) throws IOException {
+        ArrayList<Token> tokens = new ArrayList<>();
         StreamTokenizer tokenizer = new StreamTokenizer(new StringReader(exp));
-        tokenizer.ordinaryChar('-');
-        List<String> tokBuf = new ArrayList<>();
+        tokenizer.ordinaryChar('/');
+        tokenizer.commentChar('#');
         while (tokenizer.nextToken() != StreamTokenizer.TT_EOF) {
-            switch (tokenizer.ttype) {
-                case StreamTokenizer.TT_NUMBER:
-                    tokBuf.add(String.valueOf(tokenizer.nval));
-                    break;
-                case StreamTokenizer.TT_WORD:
-                    tokBuf.add(tokenizer.sval);
-                    break;
-                default:
-                    tokBuf.add(String.valueOf((char) tokenizer.ttype));
+            if (tokenizer.ttype == StreamTokenizer.TT_WORD) {
+                tokens.add(new Operator(tokenizer.sval));
+            } else if (tokenizer.ttype==StreamTokenizer.TT_NUMBER){
+                tokens.add(new DoubleValue(tokenizer.nval));
             }
+            else if (tokenizer.ttype == StreamTokenizer.TT_EOL) {
+                System.out.println();
+            } else
+                tokens.add(new Operator(String.valueOf((char) tokenizer.ttype)));
         }
-        int a = Integer.parseInt((tokBuf.get(0)));
-        String b0 = tokBuf.get(1);
-        char b = b0.charAt(0);
-        int c = Integer.parseInt((tokBuf.get(2)));
-        String res = String.valueOf(a)
-        return
-            }
+        return tokens;
+    }
 }
