@@ -3,6 +3,7 @@ package com.company;
 import com.company.tokens.Token;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by User on 10.05.2016.
@@ -12,6 +13,7 @@ public class Calculator {
     private ExpressionCalculator calculator = new ExpressionCalculator();
 
     public String calculate(String exp) throws IOException {
-        return calculator.calculate(parser.parseExpression(exp));
+        ArrayList<Token> tokens = parser.parseExpression(exp);
+        return calculator.calculate(tokens);
     }
 }

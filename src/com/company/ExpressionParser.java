@@ -18,6 +18,7 @@ public class ExpressionParser {
         ArrayList<Token> tokens = new ArrayList<>();
         StreamTokenizer tokenizer = new StreamTokenizer(new StringReader(exp));
         tokenizer.ordinaryChar('/');
+        tokenizer.ordinaryChar('-');
         while (tokenizer.nextToken() != StreamTokenizer.TT_EOF) {
             if (tokenizer.ttype == StreamTokenizer.TT_WORD) {
                 tokens.add(new Operator(tokenizer.sval));
