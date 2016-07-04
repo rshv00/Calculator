@@ -17,15 +17,14 @@ public class ExpressionParser {
         ExpressionParser parser = new ExpressionParser();
         ArrayList<Token> tokens = new ArrayList<>();
         StreamTokenizer tokenizer = new StreamTokenizer(new StringReader(exp));
-        tokenizer.ordinaryChar('/');
         tokenizer.ordinaryChar('-');
+        tokenizer.ordinaryChar('/');
         while (tokenizer.nextToken() != StreamTokenizer.TT_EOF) {
             if (tokenizer.ttype == StreamTokenizer.TT_WORD) {
                 tokens.add(new Operator(tokenizer.sval));
-            } else if (tokenizer.ttype==StreamTokenizer.TT_NUMBER){
+            } else if (tokenizer.ttype == StreamTokenizer.TT_NUMBER) {
                 tokens.add(new DoubleValue(tokenizer.nval));
-            }
-            else if (tokenizer.ttype == StreamTokenizer.TT_EOL) {
+            } else if (tokenizer.ttype == StreamTokenizer.TT_EOL) {
                 System.out.println();
             } else
                 tokens.add(new Operator(String.valueOf((char) tokenizer.ttype)));
