@@ -9,9 +9,9 @@ import java.io.IOException;
  */
 public class Calculator {
     private ExpressionParser parser = new ExpressionParser();
-    private ExpressionCalculator calculator1 = new ExpressionCalculator();
+    private ExpressionCalculator calculator = new ExpressionCalculator();
 
     public String calculate(String exp) throws IOException {
-        return calculator1.calculate(parser.parseExpression(exp));
+        return calculator.calculate(parser.parseExpression(exp));
     }
 }
