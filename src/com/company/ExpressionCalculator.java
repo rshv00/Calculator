@@ -13,6 +13,7 @@ import java.util.List;
 public class ExpressionCalculator {
 
     String calculate(List<Token> tokens) {
+        ExpressionCalculator calculator1 = new ExpressionCalculator();
         if (tokens.size() == 1) {
             return Double.toString(((DoubleValue) tokens.get(0)).getValue());
         }

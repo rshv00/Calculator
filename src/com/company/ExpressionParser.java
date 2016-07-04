@@ -14,10 +14,10 @@ import java.util.StringTokenizer;
  */
 public class ExpressionParser {
     ArrayList<Token> parseExpression(String exp) throws IOException {
+        ExpressionParser parser = new ExpressionParser();
         ArrayList<Token> tokens = new ArrayList<>();
         StreamTokenizer tokenizer = new StreamTokenizer(new StringReader(exp));
         tokenizer.ordinaryChar('/');
-        tokenizer.commentChar('#');
         while (tokenizer.nextToken() != StreamTokenizer.TT_EOF) {
             if (tokenizer.ttype == StreamTokenizer.TT_WORD) {
                 tokens.add(new Operator(tokenizer.sval));
