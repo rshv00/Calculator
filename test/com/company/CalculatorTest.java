@@ -111,6 +111,7 @@ public class CalculatorTest {
     public void addTwoTwoDigitInteger() throws Exception {
         assertThat(calculator.calculate("19+5")).isEqualTo("24.0");
     }
+
     @Test
     public void addTwoTwoDigitInteger21() throws Exception {
         assertThat(calculator.calculate("5+19")).isEqualTo("24.0");
@@ -126,10 +127,12 @@ public class CalculatorTest {
     public void minusTwoTwoDigitInteger() throws Exception {
         assertThat(calculator.calculate("19-15")).isEqualTo("4.0");
     }
+
     @Test
     public void minusTwoTwoDigitInteger2() throws Exception {
         assertThat(calculator.calculate("4-15")).isEqualTo("-11.0");
     }
+
     @Test
     public void minusTwoTwoDigitInteger221() throws Exception {
         assertThat(calculator.calculate("15-4")).isEqualTo("11.0");

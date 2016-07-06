@@ -15,8 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created by User on 30.05.2016.
  */
 public class ExpressionCalculatorTest {
-   ExpressionCalculator expressionCalculator;
-
+    ExpressionCalculator expressionCalculator;
+    DoubleValue doubleValue = new DoubleValue(1);
     @Before
     public void setUp() throws Exception {
         expressionCalculator = new ExpressionCalculator();
@@ -28,50 +28,162 @@ public class ExpressionCalculatorTest {
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("1.0");
 
     }
+
     @Test
     public void simpleInteger2() throws Exception {
         List<Token> tokens = Arrays.<Token>asList(new DoubleValue(2));
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("2.0");
     }
+
     @Test
     public void addTwoSimpleInteger() throws Exception {
         List<Token> tokens = Arrays.<Token>asList(new DoubleValue(2), new Operator("+"), new DoubleValue(3));
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("5.0");
     }
+
     @Test
     public void addTwoSimpleInteger2() throws Exception {
         List<Token> tokens = Arrays.<Token>asList(new DoubleValue(4), new Operator("+"), new DoubleValue(5));
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("9.0");
     }
+
     @Test
     public void addTwoSimpleInteger3() throws Exception {
         List<Token> tokens = Arrays.<Token>asList(new DoubleValue(9), new Operator("+"), new DoubleValue(5));
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("14.0");
     }
+
     @Test
     public void minusTwoSimpleInteger() throws Exception {
         List<Token> tokens = Arrays.<Token>asList(new DoubleValue(9), new Operator("-"), new DoubleValue(5));
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("4.0");
     }
+
     @Test
     public void multiplyTwoSimpleInteger() throws Exception {
         List<Token> tokens = Arrays.<Token>asList(new DoubleValue(9), new Operator("*"), new DoubleValue(5));
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("45.0");
     }
+
     @Test
     public void divideTwoSimpleInteger() throws Exception {
         List<Token> tokens = Arrays.<Token>asList(new DoubleValue(4), new Operator("/"), new DoubleValue(2));
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("2.0");
     }
+
     @Test
     public void divideTwoSimpleInteger2() throws Exception {
         List<Token> tokens = Arrays.<Token>asList(new DoubleValue(9), new Operator("/"), new DoubleValue(5));
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("1.8");
     }
+
     @Test
     public void addTwoDigitInteger3() throws Exception {
         List<Token> tokens = Arrays.<Token>asList(new DoubleValue(91), new Operator("+"), new DoubleValue(5));
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("96.0");
     }
+
+    @Test
+    public void ComplexExpression() throws Exception {
+        DoubleValue doubleValue = new DoubleValue(1);
+        Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("3.0");
+    }
+    @Test
+    public void ComplexExpression2() throws Exception {
+        DoubleValue doubleValue = new DoubleValue(1);
+        Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("4.0");
+    }
+    @Test
+    public void ComplexExpression3() throws Exception {
+        DoubleValue doubleValue = new DoubleValue(1);
+        Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("5.0");
+    }
+    @Test
+    public void ComplexExpression4() throws Exception {
+
+        final Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, new Operator("+"), doubleValue, new Operator("+"), doubleValue, new Operator("+"), doubleValue
+                , new Operator("+"), doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("6.0");
+    }
+    @Test
+    public void ComplexExpression5() throws Exception {
+        DoubleValue doubleValue = new DoubleValue(1);
+        final Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("7.0");
+    }
+    @Test
+    public void ComplexExpression6() throws Exception {
+        DoubleValue doubleValue = new DoubleValue(1);
+        Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue
+                , operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("8.0");
+    }
+    @Test
+    public void ComplexExpression7() throws Exception {
+         DoubleValue doubleValue = new DoubleValue(1);
+        final Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue
+                , operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("9.0");
+    }
+    @Test
+    public void ComplexExpression8() throws Exception {
+        DoubleValue doubleValue = new DoubleValue(1);
+        final Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("10.0");
+    }
+    @Test
+    public void ComplexExpression9() throws Exception {
+        final DoubleValue doubleValue = new DoubleValue(1);
+        final Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("11.0");
+    }
+    @Test
+    public void ComplexExpression11() throws Exception {
+        final DoubleValue doubleValue = new DoubleValue(1);
+        final Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("12.0");
+    }
+    @Test
+    public void ComplexExpression111() throws Exception {
+        DoubleValue doubleValue = new DoubleValue(1);
+        Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("13.0");
+    }
+    @Test
+    public void ComplexExpression112() throws Exception {
+        DoubleValue doubleValue = new DoubleValue(1);
+        Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("14.0");
+    }
+    @Test
+    public void ComplexExpression22() throws Exception {
+        DoubleValue doubleValue = new DoubleValue(1);
+        Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("15.0");
+    }
+    @Test
+    public void ComplexExpression222() throws Exception {
+        DoubleValue doubleValue = new DoubleValue(1);
+        Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("16.0");
+    }
+
 
 }
