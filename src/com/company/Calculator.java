@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.tokens.Token;
 
+import javax.script.ScriptException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class Calculator {
     private ExpressionParser parser = new ExpressionParser();
     private ExpressionCalculator calculator = new ExpressionCalculator();
 
-    public String calculate(String exp) throws IOException {
+    public String calculate(String exp) throws IOException, ScriptException {
         ArrayList<Token> tokens = parser.parseExpression(exp);
         return calculator.calculate(tokens);
     }

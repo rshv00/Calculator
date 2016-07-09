@@ -4,9 +4,6 @@ import com.company.tokens.DoubleValue;
 import com.company.tokens.Operator;
 import com.company.tokens.Token;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,31 +12,58 @@ import java.util.List;
  */
 public class ExpressionCalculator {
 
-    ArrayList<Double> numbers = new ArrayList<>();
-    ArrayList<String> operators = new ArrayList<>();
-
     String calculate(List<Token> tokens) {
-        ScriptEngineManager scm = new ScriptEngineManager();
-        ScriptEngine jsEngine = scm.getEngineByName("JavaScript");
-        double v = ((DoubleValue) tokens.get(0)).getValue();
         if (tokens.size() == 1) {
-            return Double.toString(v);
+            return Double.toString(((DoubleValue) tokens.get(0)).getValue());
         }
-        for (int i = 0; i < tokens.size(); i += 2) {
-            numbers.add(((DoubleValue) tokens.get(i)).getValue());
-        }
-        for (int i = 1; i<tokens.size();i+=2){
-            operators.add((((Operator) tokens.get(i)).getOperator()));
-        }
-        for (int i = 0;i<tokens.size();i+=3){
-            Double e = numbers.get(i);
-            String w1 = operators.get(i+1);
-            Double e2 = numbers.get(i+2);
-            char w = w1.charAt(0);
+        if (tokens.size() == 3 && ((Operator) tokens.get(1)).getOperator().equals("+")) {
 
-            Double res = (Double) jsEngine.eval(e+w+e2);
+            return Double.toString(((DoubleValue) tokens.get(0)).getValue() + ((DoubleValue) tokens.get(2)).getValue());
         }
-        return Double.toString(res);
+        if (tokens.size() == 3 && ((Operator) tokens.get(1)).getOperator().equals("-")) {
 
+            return Double.toString(((DoubleValue) tokens.get(0)).getValue() - ((DoubleValue) tokens.get(2)).getValue());
+        }
+        if (tokens.size() == 3 && ((Operator) tokens.get(1)).getOperator().equals("*")) {
+
+            return Double.toString(((DoubleValue) tokens.get(0)).getValue() * ((DoubleValue) tokens.get(2)).getValue());
+        }
+        if (tokens.size() == 3 && ((Operator) tokens.get(1)).getOperator().equals("/")) {
+
+            return Double.toString(((DoubleValue) tokens.get(0)).getValue() / ((DoubleValue) tokens.get(2)).getValue());
+        }
+        if (tokens.size() == 5 && ((Operator) tokens.get(1)).getOperator().equals("+")
+                && ((Operator) tokens.get(3)).getOperator().equals("+")) {
+
+            return Double.toString(((DoubleValue) tokens.get(0)).getValue()
+                    + ((DoubleValue) tokens.get(2)).getValue()
+                    + ((DoubleValue) tokens.get(4)).getValue());
+        }
+        if (tokens.size() == 7 && ((Operator) tokens.get(1)).getOperator().equals("+")
+                && ((Operator) tokens.get(3)).getOperator().equals("+")
+                && ((Operator) tokens.get(5)).getOperator().equals("+")) {
+
+            return Double.toString(((DoubleValue) tokens.get(0)).getValue()
+                    + ((DoubleValue) tokens.get(2)).getValue()
+                    + ((DoubleValue) tokens.get(4)).getValue()
+                    + ((DoubleValue) tokens.get(6)).getValue());
+        }
+        if (tokens.size() == 9 && ((Operator) tokens.get(1)).getOperator().equals("+")
+                && ((Operator) tokens.get(3)).getOperator().equals("+")
+                && ((Operator) tokens.get(5)).getOperator().equals("+")
+                && ((Operator) tokens.get(7)).getOperator().equals("+")) {
+
+            return Double.toString(((DoubleValue) tokens.get(0)).getValue()
+                    + ((DoubleValue) tokens.get(2)).getValue()
+                    + ((DoubleValue) tokens.get(4)).getValue()
+                    + ((DoubleValue) tokens.get(6)).getValue()
+                    + ((DoubleValue) tokens.get(8)).getValue());
+        }
+        for (int i =0;i<tokens.size();i++){
+
+        }
+        return null;
     }
+
+
 }

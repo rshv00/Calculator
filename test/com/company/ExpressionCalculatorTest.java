@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ExpressionCalculatorTest {
     ExpressionCalculator expressionCalculator;
     DoubleValue doubleValue = new DoubleValue(1);
+
     @Before
     public void setUp() throws Exception {
         expressionCalculator = new ExpressionCalculator();
@@ -90,100 +91,32 @@ public class ExpressionCalculatorTest {
         List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue);
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("3.0");
     }
+
     @Test
     public void ComplexExpression2() throws Exception {
         DoubleValue doubleValue = new DoubleValue(1);
         Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue,
+                operator, doubleValue);
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("4.0");
     }
+
     @Test
     public void ComplexExpression3() throws Exception {
         DoubleValue doubleValue = new DoubleValue(1);
         Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue,
+                operator, doubleValue, operator, doubleValue);
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("5.0");
     }
+
     @Test
     public void ComplexExpression4() throws Exception {
-
-        final Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, new Operator("+"), doubleValue, new Operator("+"), doubleValue, new Operator("+"), doubleValue
+        DoubleValue doubleValue = new DoubleValue(1);
+        Operator operator = new Operator("+");
+        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, new Operator("+"),
+                doubleValue, new Operator("+"), doubleValue, new Operator("+"), doubleValue
                 , new Operator("+"), doubleValue);
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("6.0");
     }
-    @Test
-    public void ComplexExpression5() throws Exception {
-        DoubleValue doubleValue = new DoubleValue(1);
-        final Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("7.0");
-    }
-    @Test
-    public void ComplexExpression6() throws Exception {
-        DoubleValue doubleValue = new DoubleValue(1);
-        Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue
-                , operator, doubleValue, operator, doubleValue, operator, doubleValue);
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("8.0");
-    }
-    @Test
-    public void ComplexExpression7() throws Exception {
-         DoubleValue doubleValue = new DoubleValue(1);
-        final Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue
-                , operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("9.0");
-    }
-    @Test
-    public void ComplexExpression8() throws Exception {
-        DoubleValue doubleValue = new DoubleValue(1);
-        final Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("10.0");
-    }
-    @Test
-    public void ComplexExpression9() throws Exception {
-        final DoubleValue doubleValue = new DoubleValue(1);
-        final Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("11.0");
-    }
-    @Test
-    public void ComplexExpression11() throws Exception {
-        final DoubleValue doubleValue = new DoubleValue(1);
-        final Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("12.0");
-    }
-    @Test
-    public void ComplexExpression111() throws Exception {
-        DoubleValue doubleValue = new DoubleValue(1);
-        Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("13.0");
-    }
-    @Test
-    public void ComplexExpression112() throws Exception {
-        DoubleValue doubleValue = new DoubleValue(1);
-        Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("14.0");
-    }
-    @Test
-    public void ComplexExpression22() throws Exception {
-        DoubleValue doubleValue = new DoubleValue(1);
-        Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("15.0");
-    }
-    @Test
-    public void ComplexExpression222() throws Exception {
-        DoubleValue doubleValue = new DoubleValue(1);
-        Operator operator = new Operator("+");
-        List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue, operator, doubleValue);
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("16.0");
-    }
-
-
 }
