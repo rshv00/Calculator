@@ -1,9 +1,8 @@
 package com.company;
 
-import com.company.tokens.DoubleValue;
-import com.company.tokens.Operator;
 import com.company.tokens.Token;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,56 +12,64 @@ import java.util.List;
 public class ExpressionCalculator {
 
     String calculate(List<Token> tokens) {
-        if (tokens.size() == 1) {
-            return Double.toString(((DoubleValue) tokens.get(0)).getValue());
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < tokens.size(); i++) {
+            list.add(String.valueOf(tokens.get(i)));
         }
-        if (tokens.size() == 3 && ((Operator) tokens.get(1)).getOperator().equals("+")) {
+        if (list.size() > 1) {
+            for (int i = 1; i < list.size(); i += 2) {
+                String operator = list.get(i);
+                if (operator.equals('*')) {
+                    String token1 = list.get(i - 1);
+                    String token2 = list.get(i + 1);
+                    String s = String.valueOf(token1);
+                    String s1 = String.valueOf(token2);
+                    String a = String.valueOf(Double.valueOf(s) / Double.valueOf(s1));
+                    list.remove(i - 1);
+                    list.remove(i);
+                    list.remove(i + 1);
+                    list.add(a);
+                }
+                if (operator.equals('/')) {
+                    String token1 = list.get(i - 1);
+                    String token2 = list.get(i + 1);
+                    String s = String.valueOf(token1);
+                    String s1 = String.valueOf(token2);
+                    String a = String.valueOf(Double.valueOf(s) / Double.valueOf(s1));
+                    list.remove(i - 1);
+                    list.remove(i);
+                    list.remove(i + 1);
+                    list.add(a);
+                }
+            }
+            for (int i = 1; i < list.size(); i += 2) {
+                String operator = list.get(i);
+                if (operator.equals('+')) {
+                    String token1 = list.get(i - 1);
+                    String token2 = list.get(i + 1);
+                    String s = String.valueOf(token1);
+                    String s1 = String.valueOf(token2);
+                    String a = String.valueOf(Double.valueOf(s) + Double.valueOf(s1));
+                    list.remove(i - 1);
+                    list.remove(i);
+                    list.remove(i + 1);
+                    list.add(a);
+                }
+                if (operator.equals('-')) {
+                    String token1 = list.get(i - 1);
+                    String token2 = list.get(i + 1);
+                    String s = String.valueOf(token1);
+                    String s1 = String.valueOf(token2);
+                    String a = String.valueOf(Double.valueOf(s) - Double.valueOf(s1));
+                    list.remove(i - 1);
+                    list.remove(i);
+                    list.remove(i + 1);
+                    list.add(a);
+                }
+            }
 
-            return Double.toString(((DoubleValue) tokens.get(0)).getValue() + ((DoubleValue) tokens.get(2)).getValue());
         }
-        if (tokens.size() == 3 && ((Operator) tokens.get(1)).getOperator().equals("-")) {
-
-            return Double.toString(((DoubleValue) tokens.get(0)).getValue() - ((DoubleValue) tokens.get(2)).getValue());
-        }
-        if (tokens.size() == 3 && ((Operator) tokens.get(1)).getOperator().equals("*")) {
-
-            return Double.toString(((DoubleValue) tokens.get(0)).getValue() * ((DoubleValue) tokens.get(2)).getValue());
-        }
-        if (tokens.size() == 3 && ((Operator) tokens.get(1)).getOperator().equals("/")) {
-
-            return Double.toString(((DoubleValue) tokens.get(0)).getValue() / ((DoubleValue) tokens.get(2)).getValue());
-        }
-        if (tokens.size() == 5 && ((Operator) tokens.get(1)).getOperator().equals("+")
-                && ((Operator) tokens.get(3)).getOperator().equals("+")) {
-
-            return Double.toString(((DoubleValue) tokens.get(0)).getValue()
-                    + ((DoubleValue) tokens.get(2)).getValue()
-                    + ((DoubleValue) tokens.get(4)).getValue());
-        }
-        if (tokens.size() == 7 && ((Operator) tokens.get(1)).getOperator().equals("+")
-                && ((Operator) tokens.get(3)).getOperator().equals("+")
-                && ((Operator) tokens.get(5)).getOperator().equals("+")) {
-
-            return Double.toString(((DoubleValue) tokens.get(0)).getValue()
-                    + ((DoubleValue) tokens.get(2)).getValue()
-                    + ((DoubleValue) tokens.get(4)).getValue()
-                    + ((DoubleValue) tokens.get(6)).getValue());
-        }
-        if (tokens.size() == 9 && ((Operator) tokens.get(1)).getOperator().equals("+")
-                && ((Operator) tokens.get(3)).getOperator().equals("+")
-                && ((Operator) tokens.get(5)).getOperator().equals("+")
-                && ((Operator) tokens.get(7)).getOperator().equals("+")) {
-
-            return Double.toString(((DoubleValue) tokens.get(0)).getValue()
-                    + ((DoubleValue) tokens.get(2)).getValue()
-                    + ((DoubleValue) tokens.get(4)).getValue()
-                    + ((DoubleValue) tokens.get(6)).getValue()
-                    + ((DoubleValue) tokens.get(8)).getValue());
-        }
-        for (int i =0;i<tokens.size();i++){
-
-        }
-        return null;
+        return list.get(0);
     }
 
 
