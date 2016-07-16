@@ -119,4 +119,12 @@ public class ExpressionCalculatorTest {
                 , new Operator("+"), doubleValue);
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("6.0");
     }
+
+    @Test
+    public void ComplexExpression5() throws Exception {
+        List<Token> tokens = Arrays.asList(new DoubleValue(76), new Operator("+"), new DoubleValue(12),
+                new Operator("-"), new DoubleValue(2), new Operator("*"), new DoubleValue(3), new Operator("+"),
+                new DoubleValue(60), new Operator("/"), new DoubleValue(2));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("112.0");
+    }
 }

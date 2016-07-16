@@ -4,6 +4,7 @@ import com.company.tokens.Token;
 
 import javax.script.ScriptException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +14,7 @@ public class Calculator {
     private ExpressionParser parser = new ExpressionParser();
     private ExpressionCalculator calculator = new ExpressionCalculator();
 
-    public String calculate(String exp) throws IOException, ScriptException {
+    public String calculate(String exp) throws IOException, ScriptException, InvocationTargetException {
         ArrayList<Token> tokens = parser.parseExpression(exp);
         return calculator.calculate(tokens);
     }
