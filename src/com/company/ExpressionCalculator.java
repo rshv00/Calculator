@@ -35,6 +35,7 @@ public class ExpressionCalculator {
                     list.remove(i - 1);
                     list.add(i - 1, new DoubleValue(val));
                     foundHighPriorityOperator = true;
+                    break;
                 }
             }
             if (foundHighPriorityOperator) {
@@ -55,6 +56,7 @@ public class ExpressionCalculator {
                     list.remove(i);
                     list.remove(i - 1);
                     list.add(i - 1, new DoubleValue(val));
+                    break;
                 }
             }
         }
