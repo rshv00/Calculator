@@ -92,6 +92,10 @@ public class ExpressionParserTest {
                 new Operator("*"), new DoubleValue(7));
 
     }
+    @Test
+    public void parseBrackets() throws Exception {
+        assertThat(expressionParser.parseExpression("(1)")).hasSize(3).containsExactly(new Operator("("), new DoubleValue(1),new Operator(")") );
+    }
 
 
 }
