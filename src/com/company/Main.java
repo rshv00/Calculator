@@ -14,5 +14,6 @@ public class Main {
         Calculator calculator = new Calculator();
         String result = calculator.calculate(expression);
         System.out.println(result);
+
      }
 }

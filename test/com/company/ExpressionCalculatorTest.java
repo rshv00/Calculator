@@ -127,4 +127,10 @@ public class ExpressionCalculatorTest {
                 new DoubleValue(60), new Operator("/"), new DoubleValue(2));
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("112.0");
     }
+@Test
+    public void Brackets() throws Exception{
+        List<Token> tokens = Arrays.asList(new DoubleValue(1), new Operator("+"), new Operator("("),
+            new DoubleValue(2), new Operator("*"), new DoubleValue(3), new Operator(")"));
+    assertThat(expressionCalculator.calculate(tokens)).isEqualTo("7");
+}
 }
