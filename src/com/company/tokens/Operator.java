@@ -34,4 +34,11 @@ public class Operator extends Token {
    public int hashCode() {
       return operator != null ? operator.hashCode() : 0;
    }
+
+   @Override
+   public String toString() {
+      return "Operator{" +
+              "operator='" + operator + '\'' +
+              '}';
+   }
 }

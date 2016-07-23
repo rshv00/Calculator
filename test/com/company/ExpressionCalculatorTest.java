@@ -85,7 +85,7 @@ public class ExpressionCalculatorTest {
     }
 
     @Test
-    public void ComplexExpression() throws Exception {
+    public void complexExpression() throws Exception {
         DoubleValue doubleValue = new DoubleValue(1);
         Operator operator = new Operator("+");
         List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue);
@@ -93,7 +93,7 @@ public class ExpressionCalculatorTest {
     }
 
     @Test
-    public void ComplexExpression2() throws Exception {
+    public void complexExpression2() throws Exception {
         DoubleValue doubleValue = new DoubleValue(1);
         Operator operator = new Operator("+");
         List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue,
@@ -102,7 +102,7 @@ public class ExpressionCalculatorTest {
     }
 
     @Test
-    public void ComplexExpression3() throws Exception {
+    public void complexExpression3() throws Exception {
         DoubleValue doubleValue = new DoubleValue(1);
         Operator operator = new Operator("+");
         List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, operator, doubleValue,
@@ -111,7 +111,7 @@ public class ExpressionCalculatorTest {
     }
 
     @Test
-    public void ComplexExpression4() throws Exception {
+    public void complexExpression4() throws Exception {
         DoubleValue doubleValue = new DoubleValue(1);
         Operator operator = new Operator("+");
         List<Token> tokens = Arrays.<Token>asList(doubleValue, operator, doubleValue, new Operator("+"),
@@ -121,16 +121,24 @@ public class ExpressionCalculatorTest {
     }
 
     @Test
-    public void ComplexExpression5() throws Exception {
+    public void complexExpression5() throws Exception {
         List<Token> tokens = Arrays.asList(new DoubleValue(76), new Operator("+"), new DoubleValue(12),
                 new Operator("-"), new DoubleValue(2), new Operator("*"), new DoubleValue(3), new Operator("+"),
                 new DoubleValue(60), new Operator("/"), new DoubleValue(2));
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("112.0");
     }
-@Test
-    public void Brackets() throws Exception{
+
+    @Test
+    public void brackets0() throws Exception {
+        List<Token> tokens = Arrays.asList(new Operator("("),
+                new DoubleValue(1), new Operator(")"));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("1");
+    }
+
+    @Test
+    public void brackets() throws Exception {
         List<Token> tokens = Arrays.asList(new DoubleValue(1), new Operator("+"), new Operator("("),
-            new DoubleValue(2), new Operator("*"), new DoubleValue(3), new Operator(")"));
-    assertThat(expressionCalculator.calculate(tokens)).isEqualTo("7");
-}
+                new DoubleValue(2), new Operator("*"), new DoubleValue(3), new Operator(")"));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("7");
+    }
 }

@@ -16,7 +16,17 @@ public class ExpressionCalculator {
 
     String calculate(List<Token> tokens) {
         ArrayList<Token> list = new ArrayList<>(tokens);
+
         while (list.size() > 1) {
+
+            for (int i = 0; i < list.size(); i += 2) {
+                String operator = ((Operator) list.get(i)).getOperator();
+                if (operator.equals("(")) {
+                    testAddingToExpressionInBracketsToArrayList(list, i, operator);
+
+                }
+
+            }
 
             boolean foundHighPriorityOperator = false;
             for (int i = 1; i < list.size(); i += 2) {
@@ -64,5 +74,19 @@ public class ExpressionCalculator {
         String res = String.valueOf(((DoubleValue) list.get(0)).getValue());
 
         return res;
+    }
+
+    private void testAddingToExpressionInBracketsToArrayList(ArrayList<Token> list, int i, String operator) {
+        ArrayList<Token> inBrackets = new ArrayList<>();
+        for (; i < list.size(); i++) {
+            if (!operator.equals(")")) {
+                inBrackets.add(list.get(i));
+            }
+        }
+        inBrackets.remove(0);
+        int size = inBrackets.size();
+        inBrackets.remove(size-1);
+        System.out.println(inBrackets);
+
     }
 }
