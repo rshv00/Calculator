@@ -36,5 +36,12 @@ package com.company.tokens;
         long temp = Double.doubleToLongBits(value);
         return (int) (temp ^ (temp >>> 32));
     }
+
+    @Override
+    public String toString() {
+        return "DoubleValue{" +
+                "value=" + value +
+                '}';
+    }
 }
 

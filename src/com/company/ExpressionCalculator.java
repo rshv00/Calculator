@@ -20,10 +20,9 @@ public class ExpressionCalculator {
         while (list.size() > 1) {
 
             for (int i = 0; i < list.size(); i += 2) {
-                String operator = ((Operator) list.get(i)).getOperator();
-                if (operator.equals("(")) {
-                    testAddingToExpressionInBracketsToArrayList(list, i, operator);
-
+                Token token = list.get(i);
+                if (token instanceof Operator && ((Operator) token).getOperator().equals("(")) {
+                    testAddingToExpressionInBracketsToArrayList(list, i);
                 }
 
             }
@@ -76,17 +75,27 @@ public class ExpressionCalculator {
         return res;
     }
 
-    private void testAddingToExpressionInBracketsToArrayList(ArrayList<Token> list, int i, String operator) {
+    private void testAddingToExpressionInBracketsToArrayList(ArrayList<Token> list, int positionOfOpenBracket) {
         ArrayList<Token> inBrackets = new ArrayList<>();
-        for (; i < list.size(); i++) {
-            if (!operator.equals(")")) {
-                inBrackets.add(list.get(i));
+        int openBracketsCounter = 0;
+        for (int i = positionOfOpenBracket + 1; i < list.size(); i++) {
+            Token token = list.get(i);
+            if (token instanceof Operator) {
+                String operator = ((Operator) token).getOperator();
+                if (operator.equals(")")) {
+                    if (openBracketsCounter == 0) {
+                        break;
+                    } else {
+                        openBracketsCounter--;
+                    }
+                } else if (operator.equals("(")) {
+                    openBracketsCounter++;
+                }
             }
+            inBrackets.add(list.get(i));
         }
-        inBrackets.remove(0);
-        int size = inBrackets.size();
-        inBrackets.remove(size-1);
         System.out.println(inBrackets);
+        System.out.println(calculate(inBrackets));
 
     }
 }
