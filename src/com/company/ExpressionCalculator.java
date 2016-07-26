@@ -6,6 +6,7 @@ import com.company.tokens.Token;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -23,6 +24,7 @@ public class ExpressionCalculator {
                 Token token = list.get(i);
                 if (token instanceof Operator && ((Operator) token).getOperator().equals("(")) {
                     testAddingToExpressionInBracketsToArrayList(list, i);
+
                 }
 
             }
@@ -94,8 +96,27 @@ public class ExpressionCalculator {
             }
             inBrackets.add(list.get(i));
         }
+        Token calculate = null;
+        while (inBrackets.contains(")")) {
+            calculate = new DoubleValue(Double.parseDouble(calculate(inBrackets)));
+        }
+        while (list.contains(")")) {
+            for (int i = 0; i < list.size(); i += 2) {
+                String token = String.valueOf(list.get(i));
+                if (token.equals("(") || token.equals(")")) {
+                    list.remove(i);
+                    break;
+                }
+                if (list.contains(")")) {
+                    list.remove(i);
+                    break;
+                }
+            }
+        }
+
+        System.out.println(list);
         System.out.println(inBrackets);
-        System.out.println(calculate(inBrackets));
+        System.out.println(calculate);
 
     }
 }
