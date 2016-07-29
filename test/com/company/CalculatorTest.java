@@ -2,6 +2,7 @@ package com.company;
 
 import org.junit.Before;
 import org.junit.Test;
+import sun.reflect.annotation.ExceptionProxy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -136,5 +137,9 @@ public class CalculatorTest {
     @Test
     public void minusTwoTwoDigitInteger221() throws Exception {
         assertThat(calculator.calculate("15-4")).isEqualTo("11.0");
+    }
+    @Test
+    public void expression() throws Exception{
+        assertThat(calculator.calculate("1+(2*(5+3)-4)+8")).isEqualTo("21.0");
     }
 }

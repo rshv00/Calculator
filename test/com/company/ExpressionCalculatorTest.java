@@ -132,13 +132,59 @@ public class ExpressionCalculatorTest {
     public void brackets0() throws Exception {
         List<Token> tokens = Arrays.asList(new Operator("("),
                 new DoubleValue(1), new Operator(")"));
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("1");
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("1.0");
     }
 
     @Test
     public void brackets() throws Exception {
-        List<Token> tokens = Arrays.asList(new DoubleValue(1), new Operator("+"), new Operator("("),
-                new DoubleValue(2), new Operator("*"), new DoubleValue(3), new Operator(")"));
-        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("7");
+        List<Token> tokens = Arrays.asList(new Operator("("),
+                new DoubleValue(2), new Operator("+"), new DoubleValue(7), new Operator(")"));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("9.0");
+    }
+
+    @Test
+    public void brackets1() throws Exception {
+        List<Token> tokens = Arrays.asList(new Operator("("),
+                new DoubleValue(3), new Operator("+"), new DoubleValue(4), new Operator(")"), new Operator("*"),
+                new DoubleValue(5));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("35.0");
+    }
+
+    @Test
+    public void brackets2() throws Exception {
+        List<Token> tokens = Arrays.asList(new DoubleValue(2), new Operator("+"), new Operator("("),
+                new DoubleValue(3), new Operator("+"), new DoubleValue(4), new Operator(")"));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("9.0");
+    }
+
+    @Test
+    public void brackets3() throws Exception {
+        List<Token> tokens = Arrays.asList(new DoubleValue(2), new Operator("+"), new Operator("("),
+                new DoubleValue(3), new Operator("+"), new DoubleValue(4), new Operator(")"), new Operator("*"),
+                new DoubleValue(5));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("37.0");
+    }
+
+    @Test
+    public void brackets4() throws Exception {
+        List<Token> tokens = Arrays.asList(new Operator("("), new Operator("("), new DoubleValue(1), new Operator(")"),
+                new Operator(")"));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("1.0");
+    }
+
+    @Test
+    public void brackets5() throws Exception {
+        List<Token> tokens = Arrays.asList(new DoubleValue(1), new Operator("+"), new Operator("("), new DoubleValue(2),
+                new Operator("*"), new Operator("("), new DoubleValue(5), new Operator("+"), new DoubleValue(3),
+                new Operator(")"), new Operator("-"), new DoubleValue(4), new Operator(")"), new Operator("+"),
+                new DoubleValue(8));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("21.0");
+    }
+
+    @Test
+    public void brackets6() throws Exception {
+        List<Token> tokens = Arrays.asList(new Operator("("), new Operator("("), new Operator("("), new DoubleValue(5),
+                new Operator(")"), new Operator(")"), new Operator(")"));
+        assertThat(expressionCalculator.calculate(tokens)).isEqualTo("5.0");
     }
 }
