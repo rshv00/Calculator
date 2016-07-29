@@ -13,9 +13,18 @@ import java.util.StringTokenizer;
  * Created by User on 30.05.2016.
  */
 public class ExpressionParser {
-    ArrayList<Token> parseExpression(String exp) throws IOException {
-        ExpressionParser parser = new ExpressionParser();
+    ArrayList<Token> parseExpression(String exp) throws IOException, CalculatorException {
+        if (exp.isEmpty()) {
+            throw new CalculatorException("Empty expression.");
+        }
+
+        for (int i = 1;i<=exp.length();i++){
+            if (!"1234567890-+/*()".contains(exp.substring(i-1,i))){
+                throw new CalculatorException("Unsupported symbol.");
+            }
+        }
         ArrayList<Token> tokens = new ArrayList<>();
+
         StreamTokenizer tokenizer = new StreamTokenizer(new StringReader(exp));
         tokenizer.ordinaryChar('-');
         tokenizer.ordinaryChar('/');
@@ -29,6 +38,10 @@ public class ExpressionParser {
             } else
                 tokens.add(new Operator(String.valueOf((char) tokenizer.ttype)));
         }
+        if (tokens.size() == 0) {
+            throw new CalculatorException("Empty expression.");
+        }
         return tokens;
+
     }
 }

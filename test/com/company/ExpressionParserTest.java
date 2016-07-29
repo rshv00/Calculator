@@ -2,10 +2,16 @@ package com.company;
 
 import com.company.tokens.DoubleValue;
 import com.company.tokens.Operator;
+import com.company.tokens.Token;
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Created by roman on 19.06.16.
@@ -92,9 +98,30 @@ public class ExpressionParserTest {
                 new Operator("*"), new DoubleValue(7));
 
     }
+
     @Test
     public void parseBrackets() throws Exception {
-        assertThat(expressionParser.parseExpression("(1)")).hasSize(3).containsExactly(new Operator("("), new DoubleValue(1),new Operator(")") );
+        assertThat(expressionParser.parseExpression("(1)")).hasSize(3).containsExactly(new Operator("("), new DoubleValue(1), new Operator(")"));
+    }
+
+    @Test
+    public void emptyExpression() throws Exception {
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                expressionParser.parseExpression("");
+            }
+        }).isInstanceOf(CalculatorException.class).hasMessage("Empty expression.");
+    }
+
+    @Test
+    public void unsupportedSymbol() throws Exception {
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                expressionParser.parseExpression("A");
+            }
+        }).isInstanceOf(CalculatorException.class).hasMessage("Unsupported symbol.");
     }
 
 

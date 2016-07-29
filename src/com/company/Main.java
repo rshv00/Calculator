@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, ScriptException, IndexOutOfBoundsException, InvocationTargetException {
+    public static void main(String[] args) throws IOException, ScriptException, IndexOutOfBoundsException, InvocationTargetException, CalculatorException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String expression = reader.readLine();
         Calculator calculator = new Calculator();

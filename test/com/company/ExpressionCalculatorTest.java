@@ -3,6 +3,7 @@ package com.company;
 import com.company.tokens.DoubleValue;
 import com.company.tokens.Operator;
 import com.company.tokens.Token;
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Created by User on 30.05.2016.
@@ -187,4 +189,39 @@ public class ExpressionCalculatorTest {
                 new Operator(")"), new Operator(")"), new Operator(")"));
         assertThat(expressionCalculator.calculate(tokens)).isEqualTo("5.0");
     }
+
+    @Test
+    public void errorOnlyOperator() throws Exception {
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                List<Token> tokens = Arrays.asList((Token) new Operator("+"));
+                expressionCalculator.calculate(tokens);
+            }
+        }).isInstanceOf(CalculatorException.class).hasMessage("Only operator");
+    }
+
+    @Test
+    public void emptyBrackets() throws Exception{
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                List<Token> tokens = Arrays.asList((Token) new Operator("("),new Operator(")"));
+                expressionCalculator.calculate(tokens);
+            }
+        }).isInstanceOf(CalculatorException.class).hasMessage("Empty brackets");
+    }
+
+    @Test
+    public void numberAfferCloseBracket() throws Exception{
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                List<Token> tokens = Arrays.asList((Token) new Operator("("),new DoubleValue(1),new Operator(")"),
+                        new DoubleValue(3));
+                expressionCalculator.calculate(tokens);
+            }
+        }).isInstanceOf(CalculatorException.class).hasMessage("Number after close bracket.");
+    }
+
 }
