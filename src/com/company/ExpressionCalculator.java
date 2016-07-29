@@ -1,12 +1,11 @@
+
 package com.company;
 
 import com.company.tokens.DoubleValue;
 import com.company.tokens.Operator;
 import com.company.tokens.Token;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -23,8 +22,7 @@ public class ExpressionCalculator {
             for (int i = 0; i < list.size(); i += 2) {
                 Token token = list.get(i);
                 if (token instanceof Operator && ((Operator) token).getOperator().equals("(")) {
-                    testAddingToExpressionInBracketsToArrayList(list, i);
-
+                    calculateExpressionInBrackets(list, i);
                 }
 
             }
@@ -77,8 +75,9 @@ public class ExpressionCalculator {
         return res;
     }
 
-    private void testAddingToExpressionInBracketsToArrayList(ArrayList<Token> list, int positionOfOpenBracket) {
+    private void calculateExpressionInBrackets(ArrayList<Token> list, int positionOfOpenBracket) {
         ArrayList<Token> inBrackets = new ArrayList<>();
+        int positionOfCloseBracket = 0;
         int openBracketsCounter = 0;
         for (int i = positionOfOpenBracket + 1; i < list.size(); i++) {
             Token token = list.get(i);
@@ -86,6 +85,7 @@ public class ExpressionCalculator {
                 String operator = ((Operator) token).getOperator();
                 if (operator.equals(")")) {
                     if (openBracketsCounter == 0) {
+                        positionOfCloseBracket = i;
                         break;
                     } else {
                         openBracketsCounter--;
@@ -96,27 +96,11 @@ public class ExpressionCalculator {
             }
             inBrackets.add(list.get(i));
         }
-        Token calculate = null;
-        while (inBrackets.contains(")")) {
-            calculate = new DoubleValue(Double.parseDouble(calculate(inBrackets)));
+        Token result = new DoubleValue(Double.parseDouble(calculate(inBrackets)));
+        list.set(positionOfOpenBracket, result);
+        for (int i = positionOfCloseBracket; i > positionOfOpenBracket; i--) {
+            list.remove(i);
         }
-        while (list.contains(")")) {
-            for (int i = 0; i < list.size(); i += 2) {
-                String token = String.valueOf(list.get(i));
-                if (token.equals("(") || token.equals(")")) {
-                    list.remove(i);
-                    break;
-                }
-                if (list.contains(")")) {
-                    list.remove(i);
-                    break;
-                }
-            }
-        }
-
-        System.out.println(list);
-        System.out.println(inBrackets);
-        System.out.println(calculate);
-
     }
+
 }
