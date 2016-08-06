@@ -6,10 +6,22 @@
       <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/assertj/assertj-core/2.4.1/assertj-core-2.4.1.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/assertj/assertj-core/2.4.1/assertj-core-2.4.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/assertj/assertj-core/2.4.1/assertj-core-2.4.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/assertj/assertj-core/2.4.1/assertj-core-2.4.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/assertj/assertj-core/2.4.1/assertj-core-2.4.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.ideaLibSources/assertj-core-2.4.1-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/assertj/assertj-core/2.4.1/assertj-core-2.4.1-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/assertj/assertj-core/2.4.1/assertj-core-2.4.1-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/assertj/assertj-core/2.4.1/assertj-core-2.4.1-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/assertj/assertj-core/2.4.1/assertj-core-2.4.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

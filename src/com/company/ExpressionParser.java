@@ -18,10 +18,11 @@ public class ExpressionParser {
             throw new CalculatorException("Empty expression.");
         }
 
-        for (int i = 1;i<=exp.length();i++){
-            if (!"1234567890-+/*()".contains(exp.substring(i-1,i))){
+        for (int i = 1; i <= exp.length(); i++) {
+            if (!"1234567890-+/*()".contains(exp.substring(i - 1, i))) {
                 throw new CalculatorException("Unsupported symbol.");
             }
+
         }
         ArrayList<Token> tokens = new ArrayList<>();
 

@@ -15,5 +15,5 @@ public class Main {
         String result = calculator.calculate(expression);
         System.out.println(result);
 
-     }
+    }
 }

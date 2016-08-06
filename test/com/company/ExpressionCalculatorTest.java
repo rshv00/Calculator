@@ -202,26 +202,98 @@ public class ExpressionCalculatorTest {
     }
 
     @Test
-    public void emptyBrackets() throws Exception{
+    public void emptyBrackets() throws Exception {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                List<Token> tokens = Arrays.asList((Token) new Operator("("),new Operator(")"));
+                List<Token> tokens = Arrays.asList((Token) new Operator("("), new Operator(")"));
                 expressionCalculator.calculate(tokens);
             }
         }).isInstanceOf(CalculatorException.class).hasMessage("Empty brackets");
     }
 
     @Test
-    public void numberAfferCloseBracket() throws Exception{
+    public void numberAfferCloseBracket() throws Exception {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                List<Token> tokens = Arrays.asList((Token) new Operator("("),new DoubleValue(1),new Operator(")"),
+                List<Token> tokens = Arrays.asList((Token) new Operator("("), new DoubleValue(1), new Operator(")"),
                         new DoubleValue(3));
                 expressionCalculator.calculate(tokens);
             }
         }).isInstanceOf(CalculatorException.class).hasMessage("Number after close bracket.");
     }
+
+    /*@Test
+    public void numberBeforeOpenBracket() throws Exception{
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                List<Token> tokens = Arrays.asList((Token) new DoubleValue(3), new Operator("("),new DoubleValue(1),
+                        new Operator("+"), new DoubleValue(2),
+                        new Operator(")"));
+                expressionCalculator.calculate(tokens);
+            }
+        }).isInstanceOf(CalculatorException.class).hasMessage("Number before open bracket.");
+    }
+*/
+    @Test
+    public void operatorInTheEndOfExp() throws Exception {
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                List<Token> tokens = Arrays.asList(new Operator("("), new DoubleValue(1), new Operator("+")
+                );
+                expressionCalculator.calculate(tokens);
+            }
+        }).isInstanceOf(CalculatorException.class).hasMessage("Operator in the end of expression.");
+    }
+
+    @Test
+    public void operatorInTheBeginningOfExp() throws Exception {
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                List<Token> tokens = Arrays.asList(new Operator("-"), new DoubleValue(1)
+                );
+                expressionCalculator.calculate(tokens);
+            }
+        }).isInstanceOf(CalculatorException.class).hasMessage("Operator in the beginning of expression.");
+    }
+
+    @Test
+    public void foundCloseBracketWhichDoesntHaveMatchingCloseBracket() throws Exception {
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                List<Token> tokens = Arrays.asList(new DoubleValue(1), new Operator(")"), new Operator("+"), new Operator("("), new DoubleValue(2));
+                expressionCalculator.calculate(tokens);
+            }
+        }).isInstanceOf(CalculatorException.class).hasMessage("Found close bracket which doesn't have matching open bracket.");
+    }
+
+    @Test
+    public void numberOfOpenBracketsDoesntEqualsNumberOfCloseBrackets() throws Exception {
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                List<Token> tokens = Arrays.asList(new Operator("("), new DoubleValue(1), new Operator("-"), new DoubleValue(2));
+                expressionCalculator.calculate(tokens);
+            }
+        }).isInstanceOf(CalculatorException.class).hasMessage("Number of open brackets doesn't equal to number of close brackets.");
+    }
+
+    @Test
+    public void twoAndMoreOperatorsSideBySide() throws Exception {
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                List<Token> tokens = Arrays.asList(new Operator("("), new DoubleValue(1), new Operator("+"),
+                        new Operator("-"), new Operator(")"));
+                expressionCalculator.calculate(tokens);
+            }
+        }).isInstanceOf(CalculatorException.class).hasMessage("Two or more incompatible operators side-by-side.");
+    }
+
 
 }

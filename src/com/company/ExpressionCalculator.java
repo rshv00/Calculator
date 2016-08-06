@@ -18,7 +18,9 @@ public class ExpressionCalculator {
         ArrayList<Token> list = new ArrayList<>(tokens);
 
         if (list.size() == 1 && list.get(0) instanceof Operator) {
+
             throw new CalculatorException("Only operator");
+
         }
 
         for (int k = 0; k < tokens.size() - 1; k++) {
@@ -29,6 +31,16 @@ public class ExpressionCalculator {
                 String operator3 = ((Operator) token3).getOperator();
                 if (operator2.equals("(") && operator3.equals(")")) {
                     throw new CalculatorException("Empty brackets");
+                }
+            }
+        }
+        for (int i = 0; i < tokens.size() - 1; i++) {
+            Token token = list.get(i);
+            Token token1 = list.get(i + 1);
+            if (token instanceof DoubleValue && token1 instanceof Operator) {
+                String elem = ((Operator) token1).getOperator();
+                if (elem.equals("(")) {
+                    throw new CalculatorException("Number before open bracket.");
                 }
             }
         }
@@ -43,11 +55,80 @@ public class ExpressionCalculator {
                 }
             }
         }
-        while (list.size() > 1) {
 
+        Token lastElement = list.get(list.size() - 1);
+        if (lastElement instanceof Operator) {
+            String lElement = ((Operator) lastElement).getOperator();
+            if (lastElement instanceof Operator && !lElement.equals(")"))
+                throw new CalculatorException("Operator in the end of expression.");
+        }
+        Token firstElement = list.get(0);
+        if (firstElement instanceof Operator) {
+            String fElement = ((Operator) firstElement).getOperator();
+            if (firstElement instanceof Operator && !fElement.equals("("))
+                throw new CalculatorException("Operator in the beginning of expression.");
+        }
+        int BracketsCounter = 0;
+        for (int i = 0; i < tokens.size(); i++) {
+            Token token = list.get(i);
+            if (token instanceof Operator) {
+                String operator = ((Operator) token).getOperator();
+                if (operator.equals("(")) {
+                    BracketsCounter--;
+                } else if (operator.equals(")")) {
+                    BracketsCounter++;
+                }
+            }
+        }
+        if (BracketsCounter != 0) {
+            throw new CalculatorException("Number of open brackets doesn't equal to number of close brackets.");
+        }
+
+        int numberOfTheSameOperators = 0;
+        for (int i = 0; i < tokens.size() - 1; i++) {
+            Token token = list.get(i);
+            Token token1 = list.get(i + 1);
+            if (token instanceof Operator && token1 instanceof Operator) {
+                String operator = ((Operator) token).getOperator();
+                String operator1 = ((Operator) token1).getOperator();
+                if (!operator.equals("(") && !operator1.equals("(") || !operator.equals(")") && !operator1.equals(")")) {
+                    if (operator1.equals(")") && "/*-+".contains(operator)) {
+                        numberOfTheSameOperators++;
+                    } else if (operator.equals("(") && "/*-+".contains(operator1)) {
+                        numberOfTheSameOperators++;
+                    } else if ("/*-+".contains(operator) && "/*-+".contains(operator1)) {
+                        numberOfTheSameOperators++;
+                    } else break;
+                }
+
+            }
+
+        }
+        if (numberOfTheSameOperators > 0) {
+            throw new CalculatorException("Two or more incompatible operators side-by-side.");
+        }
+        int openBracketsCounter = 0;
+        for (int i = 0;i < tokens.size();i++){
+            Token token = list.get(i);
+            if (token instanceof Operator){
+                String operator = ((Operator) token).getOperator();
+                if (operator.equals("(")){
+                    openBracketsCounter++;
+
+                }else if (operator.equals(")")){
+                    openBracketsCounter--;
+                }
+            }
+            if (openBracketsCounter<0){
+                throw new  CalculatorException("Found close bracket which doesn't have matching open bracket.");
+            }
+        }
+
+
+        while (list.size() > 1) {
             for (int i = 0; i < list.size(); i += 2) {
                 Token token = list.get(i);
-                if (token instanceof Operator && ((Operator) token).getOperator().equals("(")) {
+                if (token instanceof Operator && !((Operator) token).getOperator().equals(")")) {
                     calculateExpressionInBrackets(list, i);
                 }
 

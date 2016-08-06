@@ -138,8 +138,9 @@ public class CalculatorTest {
     public void minusTwoTwoDigitInteger221() throws Exception {
         assertThat(calculator.calculate("15-4")).isEqualTo("11.0");
     }
+
     @Test
-    public void expression() throws Exception{
+    public void expression() throws Exception {
         assertThat(calculator.calculate("1+(2*(5+3)-4)+8")).isEqualTo("21.0");
     }
 }
