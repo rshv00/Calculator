@@ -14,7 +14,7 @@ public class Calculator {
     private ExpressionParser parser = new ExpressionParser();
     private ExpressionCalculator calculator = new ExpressionCalculator();
 
-    public String calculate(String exp) throws IOException, ScriptException, InvocationTargetException, CalculatorException {
+    public String calculate(String exp) throws IOException, CalculatorException {
         ArrayList<Token> tokens = parser.parseExpression(exp);
         return calculator.calculate(tokens);
     }
