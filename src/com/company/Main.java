@@ -10,11 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 public class Main {
 
     public static void main(String[] args) throws CalculatorException, IOException {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new  WindowMode();
-            }
-        });
+        new WindowMode();
+
     }
 }

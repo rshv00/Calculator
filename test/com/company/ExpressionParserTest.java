@@ -121,7 +121,7 @@ public class ExpressionParserTest {
             public void call() throws Throwable {
                 expressionParser.parseExpression("A");
             }
-        }).isInstanceOf(CalculatorException.class).hasMessage("Unsupported symbol.");
+        }).isInstanceOf(CalculatorException.class).hasMessage("Contains nsupported symbol.");
     }
 
 

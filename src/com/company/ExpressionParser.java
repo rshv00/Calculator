@@ -20,7 +20,7 @@ public class ExpressionParser {
 
         for (int i = 1; i <= exp.length(); i++) {
             if (!"1234567890-+/*()".contains(exp.substring(i - 1, i))) {
-                throw new CalculatorException("Unsupported symbol.");
+                throw new CalculatorException("Contains unsupported symbol.");
             }
 
         }

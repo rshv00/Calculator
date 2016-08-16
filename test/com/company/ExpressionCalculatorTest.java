@@ -224,7 +224,7 @@ public class ExpressionCalculatorTest {
         }).isInstanceOf(CalculatorException.class).hasMessage("Number after close bracket.");
     }
 
-    /*@Test
+    @Test
     public void numberBeforeOpenBracket() throws Exception{
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -236,7 +236,7 @@ public class ExpressionCalculatorTest {
             }
         }).isInstanceOf(CalculatorException.class).hasMessage("Number before open bracket.");
     }
-*/
+
     @Test
     public void operatorInTheEndOfExp() throws Exception {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
